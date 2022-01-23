@@ -1,0 +1,42 @@
+{% extends "usermanagement/base.html" %}
+
+{% block body %}
+<section class="content home">
+    <div class="container-fluid">
+        {% if messages %}
+            <div>
+                <ul>
+                {% for message in messages %}
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong>{{message}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <small class="text-muted">Fultang Polyclinic</small>
+        <h1> General Medicine </h1>
+
+        <div class="row clearfix">
+            {% for department in departments %}
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card">
+                    <a href="{% url 'usermanagement:department_info' department.name %}"> 
+                        <img class="card-img-top" src="{{ department.image.url }}" alt="Card image">
+                    </a>
+                    <div class="card-body">
+                        <h4 class="card-title">{{department.get_name_display}}</h4>
+                        <p class="card-text">{{department.description}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+</section> 
+{% endblock %}
